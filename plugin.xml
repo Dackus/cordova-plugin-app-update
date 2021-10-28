@@ -39,6 +39,7 @@
 
         <source-file src="src/android/AuthenticationOptions.java" target-dir="src/com/vaenow/appupdate/android"/>
         <source-file src="src/android/CheckAppUpdate.java" target-dir="src/com/vaenow/appupdate/android"/>
+        <source-file src="src/android/PluginOptions.java" target-dir="src/com/vaenow/appupdate/android"/>
         <source-file src="src/android/CheckUpdateThread.java" target-dir="src/com/vaenow/appupdate/android"/>
         <source-file src="src/android/Constants.java" target-dir="src/com/vaenow/appupdate/android"/>
         <source-file src="src/android/DownloadApkThread.java" target-dir="src/com/vaenow/appupdate/android"/>

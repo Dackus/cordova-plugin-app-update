@@ -73,6 +73,7 @@ public class UpdateManager {
         this.callbackContext = callbackContext;
         this.updateXmlUrl = args.getString(0);
         this.options = args.getJSONObject(1);
+        PluginOptions.setOptions(this.options);
         return this;
     }
 
