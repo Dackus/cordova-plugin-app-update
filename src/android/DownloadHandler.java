@@ -39,7 +39,7 @@ public class DownloadHandler extends Handler {
     private AlertDialog mDownloadDialog;
 
     public DownloadHandler(Context mContext, ProgressBar mProgress, AlertDialog mDownloadDialog, String mSavePath, HashMap<String, String> mHashMap) {
-        this.msgHelper = new MsgHelper(mContext.getPackageName(), mContext.getResources());
+        this.msgHelper = new MsgHelper(mContext.getPackageName(), mContext.getResources(), mContext);
         this.mDownloadDialog = mDownloadDialog;
         this.mContext = mContext;
         this.mProgress = mProgress;

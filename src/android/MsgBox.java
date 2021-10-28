@@ -29,7 +29,7 @@ public class MsgBox {
 
     public MsgBox(Context mContext) {
         this.mContext = mContext;
-        this.msgHelper = new MsgHelper(mContext.getPackageName(), mContext.getResources());
+        this.msgHelper = new MsgHelper(mContext.getPackageName(), mContext.getResources(), mContext);
     }
 
     /**

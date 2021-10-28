@@ -1,6 +1,8 @@
 package com.vaenow.appupdate.android;
 
 import android.content.res.Resources;
+import android.content.Context;
+import org.json.JSONException;
 
 /**
  * Created by LuoWen on 16/9/16.
@@ -8,6 +10,7 @@ import android.content.res.Resources;
 public class MsgHelper {
     private String packageName;
     private Resources resources;
+    private Context mContext;
 
     public static String UPDATE_TITLE = "update_title";
     public static String UPDATE_MESSAGE = "update_message";
@@ -24,17 +27,22 @@ public class MsgHelper {
     public static String UPDATE_ERROR_YES_BTN = "update_error_yes_btn";
 
 
-    MsgHelper(String packageName, Resources resources) {
+    MsgHelper(String packageName, Resources resources, Context mContext) {
         this.packageName = packageName;
         this.resources = resources;
+        this.mContext = mContext;
     }
 
     public int getId(String name) {
         return resources.getIdentifier(name, "id", packageName);
     }
 
-    public int getString(String name) {
-        return resources.getIdentifier(name, "string", packageName);
+    public String getString(String name) {
+        try {
+            return PluginOptions.getMessage(name);
+        } catch (JSONException e) {}
+
+        return this.mContext.getString(resources.getIdentifier(name, "string", packageName));
     }
 
     public int getLayout(String name) {
