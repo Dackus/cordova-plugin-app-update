@@ -16,9 +16,15 @@ public class AuthenticationOptions {
 
     public AuthenticationOptions(JSONObject options) {
         try {
-            this.setAuthType(options.getString("authType"));
-            this.setUsername(options.getString("username"));
-            this.setPassword(options.getString("password"));
+            if (options.has("authType")) {
+                this.setAuthType(options.getString("authType"));
+            }
+            if (options.has("username")) {
+                this.setUsername(options.getString("username"));
+            }
+            if (options.has("password")) {
+                this.setPassword(options.getString("password"));
+            }
         } catch (JSONException e){
             // If there is any error then ensure that auth type is unset
             this.setAuthType("");
@@ -31,10 +37,14 @@ public class AuthenticationOptions {
      * @return boolean flag indicating if there are authentication credentials
      */
     public boolean hasCredentials() {
-        return authType.equals("basic");
+        return authType.equals("basic") || authType.equals("bearer");
     }
 
     public String getEncodedAuthorization() {
+        if (authType.equals("bearer")) {
+            return "Bearer " + this.password;
+        }
+
         return "Basic " + Base64.encodeToString((this.username + ":" + this.password)
                 .getBytes(StandardCharsets.UTF_8), Base64.DEFAULT);
     }
