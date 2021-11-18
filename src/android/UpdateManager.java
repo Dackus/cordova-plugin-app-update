@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
+import android.os.Environment;
 import android.os.Handler;
 import android.widget.ProgressBar;
 import org.apache.cordova.CallbackContext;
@@ -13,7 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -177,6 +180,16 @@ public class UpdateManager {
                 }
             }
         } else {
+            // Check if previous file exists and delete.
+            HashMap<String, String> updateHashMap = checkUpdateThread.getMHashMap();
+            File previousFile = new File(
+                Environment.getExternalStorageDirectory() + "/" + "download",
+                updateHashMap.get("name") + ".apk"
+            );
+            if (previousFile.exists()) {
+                previousFile.delete();
+            }
+
             mHandler.sendEmptyMessage(Constants.VERSION_UP_TO_UPDATE);
             // Do not show Toast
             //Toast.makeText(mContext, getString("update_latest"), Toast.LENGTH_LONG).show();
